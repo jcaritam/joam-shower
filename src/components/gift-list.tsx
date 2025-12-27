@@ -25,7 +25,7 @@ export const GiftList = ({ invitation }: Props) => {
     if (!invitation) return;
 
     if (isAssignedByMe){
-      await mutateAsyncUnassigned({ invitationId: invitation.id, giftId: gift.id }, {
+      await mutateAsyncUnassigned({ invitationId: invitation.id!, giftId: gift.id }, {
         onSuccess: () => {
           refetch();
         }
@@ -35,7 +35,7 @@ export const GiftList = ({ invitation }: Props) => {
     
 
 
-    await mutateAsync({ invitationId: invitation.id, giftId: gift.id }, {
+    await mutateAsync({ invitationId: invitation.id!, giftId: gift.id }, {
       onSuccess: () => {
         refetch();
         setSelectedTemp(null);

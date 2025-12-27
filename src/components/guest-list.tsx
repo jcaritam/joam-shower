@@ -19,7 +19,7 @@ const GuestList = ({ invitation }: Props) => {
   const handleConfirmMember = (member: IMember) => {
     setSelectedTempMember(member);
     mutateAsync({
-      memberId: member.id,
+      memberId: member.id!,
       isAttending: !member.is_attending
     }, {
       onSuccess: () => {
