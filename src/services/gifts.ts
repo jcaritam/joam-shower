@@ -18,7 +18,6 @@ export const getGifts = async (section: string): Promise<IGift[]> => {
     console.error("Error fetching gifts:", error.message);
     return [];
   }
-  console.log({ data })
   return data;
 };
 

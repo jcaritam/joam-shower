@@ -96,14 +96,14 @@ export const GiftList = ({ invitation }: Props) => {
         
         { selectedSectionTemp && !isPending && data?.map((gift) => {
           const isAssignedByMe = gift.assigned_gifts.some(g => g.invitation_id === invitation?.id)
-
+          const isFull = gift.assigned_gifts.length >= gift.max_quantity;
           return (
             <div
               key={gift.id}
               className={`group p-4 rounded-2xl border transition-all duration-300 flex flex-col ${
                 isAssignedByMe
                   ? "bg-primary/5 border-primary shadow-sm"
-                  : "bg-white border-primary/10 hover:border-primary/30"
+                  : isFull ? "bg-gray-50 border-gray-200 opacity-60":"bg-white border-primary/10 hover:border-primary/30"
               }`}
             >
               <div className="flex justify-between items-center mb-2">
@@ -135,17 +135,19 @@ export const GiftList = ({ invitation }: Props) => {
 
                 <button
                   onClick={() => handleAssign(gift)}
-                  disabled={selectedTemp?.id === gift.id && (isPending || isPendingUnassigned)}
+                  disabled={(isFull && !isAssignedByMe) || (selectedTemp?.id === gift.id && (isPending || isPendingUnassigned))}
                   className={`w-full py-2.5 rounded-xl font-bold text-sm transition-all flex items-center justify-center gap-2 ${
                     isAssignedByMe
                       ? "bg-primary text-white shadow-md shadow-primary/10"
-                      : "bg-secondary text-primary hover:bg-primary/10"
+                      : isFull ? "bg-gray-200 text-gray-500 cursor-not-allowed": "bg-secondary text-primary hover:bg-primary/10"
                   }`}
                 >
                   {isAssignedByMe ? (
                     <>
                       <Check size={16} /> Asignado
                     </>
+                  ) : isFull ? (
+                      "¡Completado!"
                   ) : (
                     "Yo lo llevo"
                   )}
@@ -155,17 +157,7 @@ export const GiftList = ({ invitation }: Props) => {
           )
         })}
       </div>
-{/* 
-      {displayLimit < filteredGifts.length && (
-        <div className="flex justify-center pt-8">
-          <button
-            onClick={() => setDisplayLimit((prev) => prev + 6)}
-            className="px-8 py-3 bg-white border-2 border-primary/20 text-primary font-bold rounded-full hover:bg-primary hover:text-white hover:border-primary transition-all shadow-sm"
-          >
-            Ver más sugerencias
-          </button>
-        </div>
-      )} */}
+
 
     </div>
   )

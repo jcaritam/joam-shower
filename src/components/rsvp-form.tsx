@@ -34,7 +34,7 @@ const RSVPform = ({ invitation, handleSelectInvitation }: Props) => {
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
           <input
             className="w-full pl-11 pr-4 py-4 border-2 border-primary/10 rounded-2xl focus:border-primary outline-none transition-all text-slate-700"
-            placeholder="Ej: Familia Carita..."
+            placeholder="Ingrese nombres y/o apellidos"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSearch()}

@@ -7,6 +7,7 @@ export interface IGift {
   product_name: string;
   reference_link: string;
   section: string;
+  max_quantity: number;
 }
 
 export interface IAssignedGift {
